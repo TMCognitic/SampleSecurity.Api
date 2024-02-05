@@ -1,0 +1,9 @@
+﻿CREATE FUNCTION [dbo].[HashData]
+(
+	@Data NVARCHAR(4000)
+)
+RETURNS BINARY(64)
+AS
+BEGIN
+	RETURN HASHBYTES('SHA2_512', CONCAT(dbo.TSF_GetPreSalt(), @Data, dbo.TSF_GetPostSalt()));
+END
